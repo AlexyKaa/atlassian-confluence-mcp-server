@@ -456,6 +456,10 @@ const allTools = [
           type: 'number',
           description: 'Maximum number of results (default: 25)',
         },
+        start: {
+          type: 'number',
+          description: 'Starting index for pagination (default: 0)',
+        },
       },
       required: ['cql'],
     },
@@ -1324,7 +1328,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       case 'confluence_search':
         result = await confluenceClient.searchContent(
           args?.cql as string,
-          args?.limit as number
+          args?.limit as number,
+          args?.start as number
         );
         break;
 
